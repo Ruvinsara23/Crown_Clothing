@@ -1,0 +1,30 @@
+body{
+  margin: 0;
+  font-family:'Montserrat',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ background-color:rgb(255, 255, 255);
+padding: 10px;
+-ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll; 
+
+ 
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco , Consolas, 'Courier New',
+    monospace;
+}
+
+a{
+  text-decoration: none;
+  color:rgb(2, 2, 2); 
+  
+}
+
+*{
+  box-sizing: border-box;
+}
+
