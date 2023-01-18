@@ -16,7 +16,7 @@ const Category = () => {
 
   return(
     <Fragment>
-    <h2 className='title'>{category}</h2>
+    <h2 className='title'>{category.toUpperCase()}</h2>
     <div className='category-container'>
    
     {

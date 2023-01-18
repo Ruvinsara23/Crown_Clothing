@@ -1,4 +1,4 @@
-import { createContext,useState,useEffect} from "react";
+import { createContext,useReducer} from "react";
 
 
 
@@ -50,27 +50,90 @@ export const CartContext=createContext({
 })
 
 
+const INITIAL_STATE={
+  isCartOpen:false,
+ cartItems:[],
+ cartTotal:0
+
+}
+
+
+
+
+const cartReducer=(state,action)=>{
+  const {type,payload}=action
+  switch(type){
+    case'SET_CART_ITEM':
+    return{
+       ...state,
+       ...payload
+    }
+    case'IS_CART_OPEN':
+    return{
+       ...state,
+       isCartOpen:payload
+    }
+    default:
+      throw new Error(`${type} IN is cart open`)
+  }
+
+
+}
+
 
 
 export const CartProvider=({children})=>
-{const [isCartOpen,setCartOpen]=useState(false)
- const [cartItems,setCartItems]=useState([])
- const [cartTotal,setCartTotal]=useState(0)
+{const [{cartItems,isCartOpen,cartTotal},dispatch]=useReducer(cartReducer,INITIAL_STATE)
 
 
- const addItemToCart=(productToAdd)=>{setCartItems(addCartItem(cartItems,productToAdd ))
+  //const [isCartOpen,setCartOpen]=useState(false)
+ //const [cartItems,setCartItems]=useState([])
+ //const [cartTotal,setCartTotal]=useState(0)
+
+// const setCartItems=(cartOpen)=>{
+//   dispatch({type:OPEN_CART.IS_CART_OPEN,payload:cartOpen})
+// } 
+
+const updateCartItemReduser=(newCartItems)=>{
+  const newCartTotal=newCartItems.reduce((total,cartItem)=>total+cartItem.quantity*cartItem.price,0)
+  dispatch({
+    type:'SET_CART_ITEM', payload:{cartItems:newCartItems,cartTotal: newCartTotal
+      
+    }
+  })
+}
+
+const setCartOpen=(bool)=>{
+  dispatch({type:'IS_CART_OPEN',payload:bool})
+
+
+}
+
+
+
+ const addItemToCart=(productToAdd)=>{
+  const newCartItems=addCartItem(cartItems,productToAdd)
+  updateCartItemReduser(newCartItems)
 
  }
- const  removeItemFromCart=(cartItemToRemove)=>{setCartItems(removeCartItem(cartItems,cartItemToRemove))
+ const  removeItemFromCart=(cartItemToRemove)=>{
+  const newCartItems=removeCartItem(cartItems,cartItemToRemove)
+  updateCartItemReduser(newCartItems)
  }
 
- const  deleteItemFromCart=(deleteToCaratItem)=>{setCartItems(deleteCartItem(cartItems,deleteToCaratItem))}
+ const  deleteItemFromCart=(deleteToCaratItem)=>{
+  const newCartItems=(deleteCartItem(cartItems,deleteToCaratItem))
+  updateCartItemReduser(newCartItems)
+}
 
-useEffect(()=>{
-  const newCartTotal=cartItems.reduce((total,cartItem)=>total+cartItem.quantity*cartItem.price,0
-  )
-  setCartTotal( newCartTotal)
-},[cartItems])
+
+
+
+// useEffect(()=>{
+//   const newCartTotal=cartItems.reduce((total,cartItem)=>total+cartItem.quantity*cartItem.price,0
+//   )
+//   setCartTotal( newCartTotal)
+// },[cartItems])
  
  
 
