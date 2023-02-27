@@ -1,15 +1,15 @@
-import { createContext } from "react";
+ import { createContext } from "react";
 import {useEffect } from "react";
-import { onAuthStateChangedLisner} from "../utils/fairebase";
-
-import { useReducer } from "react";
+ import { createUserDocumentFromAuth, onAuthStateChangedLisner} from "../utils/fairebase";
+import { createAction } from "../utils/reducer-utils/createAction";
+ import { useReducer } from "react";
 
 
 export const UserContext=createContext({
     currentUser:null,
-    setCurrentUser:()=> null,
+  setCurrentUser:()=> null,
     
-})
+ })
 
 export const  USER_ACTION_TYPE={
     SET_CURRENT_USER:'SET_CURRENT_USER'
@@ -35,13 +35,13 @@ const INITIAL_STATE={
     currentUser:null
 }
 
-export const UserProvider =({children})=>{
+ export const UserProvider =({children})=>{
     const [{currentUser},dispatch]=useReducer(userReduser,INITIAL_STATE) //currentuser = to state vallue
-   // const   [currentUser,setCurrentUser]= useState(null)
+
    console.log(currentUser)
 
    const setCurrentUser=(user)=>{
-    dispatch({type:USER_ACTION_TYPE.SET_CURRENT_USER,payload:user})
+    dispatch(createAction(USER_ACTION_TYPE.SET_CURRENT_USER,user))
    }
     const value={currentUser,setCurrentUser}
 
@@ -52,13 +52,17 @@ export const UserProvider =({children})=>{
 
 
 useEffect(()=>{
-  const unsbscribe=  onAuthStateChangedLisner((user)=>{setCurrentUser(user)
-
+  const unsbscribe=  onAuthStateChangedLisner((user)=>{
+   if (user) {
+    createUserDocumentFromAuth(user)
+   }
+   setCurrentUser(user)
+    
 
 })
 return unsbscribe
 },[]
 )
 
-    return <UserContext.Provider value={value}>{children   }</UserContext.Provider>
-}
+   return <UserContext.Provider value={value}>{children   }</UserContext.Provider>
+ }
