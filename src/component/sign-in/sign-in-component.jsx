@@ -3,7 +3,6 @@ import { useState,useContext } from "react";
 import FormInput from "../form-input/form-input-component";
 import "./sign-in-input.style.scss"
 import Button from "../button/button-component";
-import { useEffect } from "react";
 import { getRedirectResult } from "firebase/auth";
 import { signInWithGooglePopup,createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, auth} from "../../utils/fairebase";
 import { UserContext } from "../../context/user.context";
