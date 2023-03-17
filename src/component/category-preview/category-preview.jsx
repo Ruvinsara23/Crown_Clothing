@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 const CategoryPreview = ({title,products}) => {
   return (
     <div className='category-preview-container'>
+
     <h1>
       <Link className='title' to={title}>{title.toUpperCase()}</Link>
     </h1>
@@ -17,6 +18,7 @@ const CategoryPreview = ({title,products}) => {
     </div>
 
     </div>
+    
   )
 }
 

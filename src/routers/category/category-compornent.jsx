@@ -5,10 +5,13 @@ import ProductCard from '../../component/product-card-compornrnt/product-card'
 import './categoy-style.scss'
 import {selectCategoriesMap} from '../../store/category/category-selector'
 import { useSelector } from 'react-redux'
+import { selectCategoriesLoding } from '../../store/category/category-selector'
+import Spinner from '../../component/spinner/spiner'
 
 const Category = () => {
   const {category}=useParams()
   const categories= useSelector(selectCategoriesMap)
+  const isLoading=useSelector(selectCategoriesLoding)
   const [products,setProducts]=useState([])
 
   useEffect(()=>{
@@ -18,16 +21,18 @@ const Category = () => {
   return(
     <Fragment>
     <h2 className='title'>{category.toUpperCase()}</h2>
-    <div className='category-container'>
-   
     {
-        products&&products.map((product)=><ProductCard key={product.id} product={product} />)
+      isLoading ?<Spinner />: <div className='category-container'>
+   
+      {
+          products&&products.map((product)=><ProductCard key={product.id} product={product} />)
+      }
+      
+      
+      </div>
+      
+      
     }
-    
-    
-    </div>
-    
-    
     </Fragment>
    
     
