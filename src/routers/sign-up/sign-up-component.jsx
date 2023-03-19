@@ -36,10 +36,10 @@ resetFormFeild()
     }
     catch(error){
         if (error.code==='auth/email-already-in-use'){
-            alert ('user creation erro',error)
+            alert ('user creation error',error)
         }
         else{
-            console.log('user creation erro',error)
+            console.log('user creation error',error)
 
 
         }

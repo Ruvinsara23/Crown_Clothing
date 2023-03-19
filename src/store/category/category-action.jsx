@@ -1,21 +1,12 @@
 import { createAction } from "../../utils/reducer-utils/createAction";
 import { CATEGORY_TYPE } from "./category-type"
-import { getCategoriesAndDocument } from "../../utils/fairebase";
+
 
 export const fetchCategoriesStart=()=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_START);
 export const fetchCategoriesSuccess=(categoriesArray)=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_SUCCESS,categoriesArray);
 export const fetchCategoriesFail=(error)=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_FAILED,error);
 
 
-export const fetchCategoriesAsync = () => async (dispatch) => {
-     dispatch(fetchCategoriesStart());
-     try {
-       const categoriesArray = await getCategoriesAndDocument('categories');
-       dispatch(fetchCategoriesSuccess(categoriesArray));
-     } catch (error) {
-       dispatch(fetchCategoriesFail(error));
-     }
-   };
 
 
 /*
