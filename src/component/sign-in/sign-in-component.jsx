@@ -1,4 +1,4 @@
-
+import { useDispatch } from "react-redux";
 import { useState,useContext } from "react";
 import FormInput from "../form-input/form-input-component";
 import "./sign-in-input.style.scss"
@@ -6,7 +6,7 @@ import Button from "../button/button-component";
 import { getRedirectResult } from "firebase/auth";
 import { signInWithGooglePopup,createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, auth} from "../../utils/fairebase";
 import { UserContext } from "../../context/user.context";
-
+import { emailSignInStart, googleSignInStart } from "../../store/user/user-action";
 
 
 const defaultFormField={
@@ -16,13 +16,15 @@ const defaultFormField={
 }
 
 const SignIn=()=>{
-
+    const dispatch= useDispatch();
     const [formField,setFormField]=useState(defaultFormField)
     const {email,password}=formField
 
     const {setCurrentUser}= useContext(UserContext)
 
 const resetFormFeild=()=>setFormField(defaultFormField)
+
+
  
 
 const handleSubmit =async(e)=>{
@@ -31,24 +33,11 @@ const handleSubmit =async(e)=>{
 
 
     try{
-        const{user}=await signInAuthUserWithEmailAndPassword(email,password,auth)
-        console.log(user)
-
-        setCurrentUser(user);
-resetFormFeild()
+        dispatch(emailSignInStart(email,password))
+        resetFormFeild()
     }
     catch(error){
-        
-        switch(error.code){
-            case 'auth/wrong-password':
-                alert('Incorrect password for email');
-            break;
-            case 'auth/user-not-found':
-                alert('no user associate with this email');
-                break;
-            default:
-                console.log(error)
-        }
+        console.log('sign in fail',error)
     }
      
     }
@@ -61,9 +50,7 @@ const handleChange=(event)=>{
 
 
 const logGoogleUser = async()=>{
- await signInWithGooglePopup();
- 
-
+ dispatch(googleSignInStart());
      
 };
 

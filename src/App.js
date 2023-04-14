@@ -9,6 +9,7 @@ import { onAuthStateChangedLisner } from "./utils/fairebase";
 import { createUserDocumentFromAuth } from "./utils/fairebase";
 import { setCurrentUser } from "./store/user/user-action";
 import { useDispatch } from "react-redux";
+import { checkUserSession } from "./store/user/user-action";
 
 
 
@@ -17,7 +18,9 @@ const App=()=> {
     const dispatch=useDispatch()
 
   useEffect(()=>{
-    const unsbscribe=onAuthStateChangedLisner((user)=>{
+
+    dispatch(checkUserSession())
+   /* const unsbscribe=onAuthStateChangedLisner((user)=>{
      if (user) {
       createUserDocumentFromAuth(user)
      }
@@ -25,10 +28,9 @@ const App=()=> {
       
   
   })
-  return unsbscribe
-  },[dispatch]
-  )
-  
+  return unsbscribe*/
+  },[]
+  ) 
   return (
     <Routes>
     <Route path ='/' element={<Navigation/>}>

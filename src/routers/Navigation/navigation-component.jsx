@@ -7,13 +7,19 @@ import Cart from "../../component/cart/cart-icon";
 import CartDropdown from "../../component/cart-dropdown/cart-dropdown";
 import { selectIsCartOpen } from "../../store/cart/cart-seletor";
 //import { CartContext } from "../../context/cart-context";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { selectCurrentuser } from "../../store/user/use-selector";
+import { singOutStart } from "../../store/user/user-action";
+
+
 
 const Navigation =()=>{
+  const dispatch=useDispatch();
   const currentUser= useSelector(selectCurrentuser)
  // const {isCartOpen}=useContext(CartContext)
 const isCartOpen=useSelector(selectIsCartOpen)
+
+const signOutUser=()=>dispatch(singOutStart())
 
 console.log(currentUser)
     return(
