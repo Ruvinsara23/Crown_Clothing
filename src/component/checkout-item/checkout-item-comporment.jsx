@@ -18,6 +18,7 @@ const CheckoutItems = ({cartItem}) => {
 
 
   return (
+    
     <div className='checkout-item-container'>
           <div className='image-container'>
           <img src={imageUrl} alt={`${name}`}/>
@@ -29,10 +30,11 @@ const CheckoutItems = ({cartItem}) => {
           <div className='arrow' onClick={addItemHandler}>+</div>
           </span>
           <span className='price'>{price*quantity}</span>
-          <div className='remove-button' onClick={deleteHandler}>&#10060;</div>
+          <div className='remove-button' onClick={deleteHandler}>&#10060;</div> 
     </div>
+    
   )
 }
 
-export default CheckoutItems
+export default CheckoutItems;
 
