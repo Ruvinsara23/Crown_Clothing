@@ -1,5 +1,5 @@
 import { Route,Routes } from "react-router-dom"
-import CategoriesPreview from "../categories-review'/categories-preview-compornent"
+import CategoriesPreview from "../categories-preview/categories-preview-compornent"
 import Category from "../category/category-compornent"
 import { useDispatch } from "react-redux"
 import { useEffect } from "react"

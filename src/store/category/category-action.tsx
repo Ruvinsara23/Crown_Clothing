@@ -1,15 +1,33 @@
+import { Action, ActionWithPayload,withMatcher} from "../../utils/reducer-utils/createAction";
+import { CATEGORY_TYPE} from "./category-type";
+import {Category} from "./category-type";
 import { createAction } from "../../utils/reducer-utils/createAction";
-import { CATEGORY_TYPE } from "./category-type"
 
 
-export const fetchCategoriesStart=()=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_START);
-export const fetchCategoriesSuccess=(categoriesArray)=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_SUCCESS,categoriesArray);
-export const fetchCategoriesFail=(error)=> createAction(CATEGORY_TYPE.FETCH_CATEGORIES_FAILED,error);
+export type FetchCategoriesStart =Action<CATEGORY_TYPE.FETCH_CATEGORIES_START>
+export type FetchCategoriesSucces=ActionWithPayload<CATEGORY_TYPE.FETCH_CATEGORIES_SUCCESS,Category[]>
+export type FetchCategoriesFailed=ActionWithPayload<CATEGORY_TYPE.FETCH_CATEGORIES_FAILED,Error>
+
+export type  CategoryAction= |FetchCategoriesStart|FetchCategoriesSucces|FetchCategoriesFailed //union
 
 
 
+export const fetchCategoriesStart=withMatcher(
+  ():FetchCategoriesStart=>
+   createAction(CATEGORY_TYPE.FETCH_CATEGORIES_START));
+
+export const fetchCategoriesSuccess=withMatcher(
+  (categoriesArray:Category[]):FetchCategoriesSucces=> 
+  createAction(CATEGORY_TYPE.FETCH_CATEGORIES_SUCCESS,categoriesArray));
+
+export const fetchCategoriesFail=withMatcher(
+  (error:Error):FetchCategoriesFailed=> 
+  createAction(CATEGORY_TYPE.FETCH_CATEGORIES_FAILED,error));
 
 /*
+
+
+
 export const fetchCategoriesAsync= () => {
    return (dispatch) => {
      dispatch(fetchCatergoriesStart());
