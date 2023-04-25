@@ -1,16 +1,3 @@
-import { USER_ACTION_TYPE } from "./user-type";
-
-const INITIAL_STATE={
-    currentUser:null,
-    isLoading:false,
-    error:null,
-}
-
-
-
-export const userReducer=(state=INITIAL_STATE,action)=>{
-    console.log(action)
-    const {type,payload} =action;
 
     switch(type){
         case USER_ACTION_TYPE.SIGN_IN_SUCCESS:
@@ -32,5 +19,3 @@ export const userReducer=(state=INITIAL_STATE,action)=>{
            return state;
 
     }
-}
-
