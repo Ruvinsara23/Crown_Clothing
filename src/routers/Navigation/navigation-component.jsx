@@ -2,15 +2,13 @@ import { Link, Outlet } from "react-router-dom";
 import { Fragment} from "react";//A common pattern in React is for a component to return multiple elements. Fragments let you group a list of children without adding extra nodes to the DOM.
 import { ReactComponent as CrwnLogo } from '../../assest/crown.svg';
 import './navigation.styles.scss'
-import { signOutUser } from "../../utils/fairebase";
 import Cart from "../../component/cart/cart-icon";
 import CartDropdown from "../../component/cart-dropdown/cart-dropdown";
 import { selectIsCartOpen } from "../../store/cart/cart-seletor";
-//import { CartContext } from "../../context/cart-context";
 import { useSelector,useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/use-selector";
 import { singOutStart } from "../../store/user/user-action";
-
+//import { CartContext } from "../../context/cart-context";
 
 
 const Navigation =()=>{
