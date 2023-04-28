@@ -8,14 +8,14 @@ import CartDropdown from "../../component/cart-dropdown/cart-dropdown";
 import { selectIsCartOpen } from "../../store/cart/cart-seletor";
 //import { CartContext } from "../../context/cart-context";
 import { useSelector,useDispatch } from "react-redux";
-import { selectCurrentuser } from "../../store/user/use-selector";
+import { selectCurrentUser } from "../../store/user/use-selector";
 import { singOutStart } from "../../store/user/user-action";
 
 
 
 const Navigation =()=>{
   const dispatch=useDispatch();
-  const currentUser= useSelector(selectCurrentuser)
+  const currentUser= useSelector(selectCurrentUser)
  // const {isCartOpen}=useContext(CartContext)
 const isCartOpen=useSelector(selectIsCartOpen)
 

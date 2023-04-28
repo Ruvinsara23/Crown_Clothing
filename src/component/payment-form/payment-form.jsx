@@ -2,16 +2,16 @@ import { CardElement ,useElements,useStripe} from "@stripe/react-stripe-js"
 import "./payment-form.style.scss"
 import Button from "../button/button-component";
 import { useSelector } from "react-redux";
-import { selectCurrentuser } from "../../store/user/use-selector";
+import { selectCurrentUser } from "../../store/user/use-selector";
 import { selectCartTotal } from "../../store/cart/cart-seletor";
-import { useState } from "react";
+//import { useState } from "react";
 
 
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const amount = useSelector(selectCartTotal);
-    const currentUser = useSelector(selectCurrentuser);
+    const currentUser = useSelector(selectCurrentUser);
    
     const paymentHandler = async (e) => {
       e.preventDefault();
