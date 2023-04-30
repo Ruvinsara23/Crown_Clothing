@@ -17,9 +17,11 @@
     justify-content: center;
   
     &:hover {
-      background-color: white;
+      background-color: rgb(249, 244, 244);
       color: black;
       border: 1px solid black;
+      font-size: 15px;
+      padding: 2px ;
     }
   
     &.google-sign-in {

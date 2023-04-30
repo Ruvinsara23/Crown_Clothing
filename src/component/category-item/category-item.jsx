@@ -6,7 +6,7 @@ import Category from "../../routers/category/category-compornent";
 const CategoryItem=({category})=>{
    const {imageUrl, title} = category; 
    return (
-    <div className='derectry-item-container' onClick={<Route path=":category" element={<Category />} />}>
+    <div className='derectry-item-container'>
     <div className='background-image '
      style={{
      backgroundImage:`url(${imageUrl})`
